@@ -1,0 +1,7 @@
+{
+  "name": "Selenium_tests",
+  "version": "0.0.1",
+  "dependencies": {
+    "protractor": "5.1.2"
+  }
+}
