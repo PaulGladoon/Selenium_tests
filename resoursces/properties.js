@@ -1,6 +1,7 @@
 module.exports = {
 
     // environment
+    build: 'http://localhost:8080/litecart/admin/',
 
     // test user data
     userName: 'admin',

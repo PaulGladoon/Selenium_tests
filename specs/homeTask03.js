@@ -26,7 +26,7 @@ describe('Home task #3', function () {
             .clear()
             .sendKeys(properties.userPassword);
 
-        authorization_page.loginBtn().click()
+        authorization_page.loginBtn().click();
 
         // assert
 
