@@ -4,7 +4,7 @@ require('events').EventEmitter.defaultMaxListeners = 0; // shutdown max listener
 var EC = protractor.ExpectedConditions; // assert protractor expected conditions
 
 
-describe('Home task #10', function () {
+describe('Home task #11', function () {
 
     beforeEach(function () {
         browser.ignoreSynchronization = true; // ignore Angular
