@@ -1,5 +1,6 @@
 var properties = require('../resoursces/properties.js');
 var authorization = require('../app-manager/authorization-helper.js');
+var path = require('path');
 
 require('events').EventEmitter.defaultMaxListeners = 0; // shutdown max listeners
 var EC = protractor.ExpectedConditions; // assert protractor expected conditions
@@ -31,7 +32,7 @@ describe('Home task #12', function () {
         element(by.name('code')).sendKeys(randomProductCode);
         element(by.css('[name="product_groups[]"][value="1-3"]')).click();
         element(by.name('quantity')).clear().sendKeys('100');
-        element(by.name("new_images[]")).sendKeys('/Users/pavelgladoon/Documents/Selenium_courses/resoursces/guitar.JPG');
+        element(by.name("new_images[]")).sendKeys(path.resolve('resoursces/guitar.JPG'));
 
         var dateValidFromSelect = element(by.name('date_valid_from'));
         var dateValidToSelect = element(by.name('date_valid_to'));
