@@ -12,6 +12,7 @@ describe('Home task #12', function () {
         browser.ignoreSynchronization = true; // ignore Angular
         browser.driver.manage().window().setSize(properties.width, properties.height); // window resolution
         browser.get('http://localhost:8080/litecart/admin/');
+        browser.driver.manage().timeouts().implicitlyWait(2000);
 
     });
 
@@ -50,7 +51,6 @@ describe('Home task #12', function () {
                 .perform();
 
         element(by.css('[href*=information]')).click();
-        browser.sleep(1000);
 
         // information
         element(by.name('manufacturer_id')).click();
