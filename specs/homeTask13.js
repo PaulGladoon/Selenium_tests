@@ -42,11 +42,12 @@ describe('Home task #13', function () {
                 $$('#checkout-summary-wrapper tr').then(function (trArray) {
                     if (trArray.length > 0) {
                         element(by.name('remove_cart_item')).click();
+                    } else {
+                        browser.wait(EC.invisibilityOf(element(by.css('tr.header'))), 1000);
                     }
                 })
             }
         })
-
 
         // assert
 
