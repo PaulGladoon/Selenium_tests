@@ -1,6 +1,5 @@
 var properties = require('../resoursces/properties.js');
 var authorization = require('../app-manager/authorization-helper.js');
-var path = require('path');
 
 require('events').EventEmitter.defaultMaxListeners = 0; // shutdown max listeners
 var EC = protractor.ExpectedConditions; // assert protractor expected conditions
@@ -31,7 +30,7 @@ describe('Home task #13', function () {
             });
             element(by.name('add_cart_product')).click();
             element(by.css('#cart .quantity')).getText().then(function (quantityValue) {
-                browser.wait(EC.visibilityOf(element(by.cssContainingText('#cart .quantity', +quantityValue + 1))), 1000)
+                browser.wait(EC.visibilityOf(element(by.cssContainingText('#cart .quantity', +quantityValue + 1))), 2000)
             });
         }
 
@@ -43,14 +42,11 @@ describe('Home task #13', function () {
                     if (trArray.length > 0) {
                         element(by.name('remove_cart_item')).click();
                     } else {
-                        browser.wait(EC.invisibilityOf(element(by.css('tr.header'))), 1000);
+                        browser.wait(EC.invisibilityOf(element(by.css('tr.header'))), 2000);
                     }
                 })
             }
         })
-
-        // assert
-
     });
 
 });
