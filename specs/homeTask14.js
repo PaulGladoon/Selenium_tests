@@ -23,7 +23,6 @@ describe('Home task #14', function () {
             '[href*="alpha-2"]',
             '[href*="alpha-3"]',
             '[href*="Regular_expression"]',
-            '[href*="Regular_expression"]',
             '[href*="address-formats.html"]',
             'tr:nth-child(8) a > i',
             '[href*="currency_and_language"]',
