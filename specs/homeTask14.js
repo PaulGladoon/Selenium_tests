@@ -32,13 +32,6 @@ describe('Home task #14', function () {
         // act
         element(by.css('[href*="AF"]')).click();
 
-        element(by.css('[href*="alpha-2"]')).click();
-        browser.getAllWindowHandles().then(function (handles) {
-            browser.switchTo().window(handles[1]);
-            browser.close();
-            browser.switchTo().window(handles[0]);
-        });
-
         for (let i = 0; i < linkElements.length; i++) {
             element(by.css(linkElements[i])).click();
             browser.getAllWindowHandles().then(function (handles) {
