@@ -18,27 +18,27 @@ describe('Home task #14', function () {
         // prepare
         authorization.login(properties.userName, properties.userPassword);
         browser.get('http://localhost:8080/litecart/admin/?app=countries&doc=countries');
-
-        var linkElements = [
-            '[href*="alpha-2"]',
-            '[href*="alpha-3"]',
-            '[href*="Regular_expression"]',
-            '[href*="address-formats.html"]',
-            'tr:nth-child(8) a > i',
-            '[href*="currency_and_language"]',
-            '[href*="country_calling_codes"]'];
-
-        // act
         element(by.css('[href*="AF"]')).click();
 
-        for (let i = 0; i < linkElements.length; i++) {
-            element(by.css(linkElements[i])).click();
-            browser.getAllWindowHandles().then(function (handles) {
-                browser.switchTo().window(handles[1]);
-                browser.close();
-                browser.switchTo().window(handles[0]);
+        Promise.all([
+            element(by.css('[href*="alpha-2"]')).getAttribute('href'),
+            element(by.css('[href*="alpha-3"]')).getAttribute('href'),
+            element(by.css('[href*="Regular_expression"]')).getAttribute('href'),
+            element(by.css('[href*="address-formats.html"]')).getAttribute('href'),
+            element(by.css('tr:nth-child(8) a')).getAttribute('href'),
+            element(by.css('[href*="currency_and_language"]')).getAttribute('href'),
+            element(by.css('[href*="country_calling_codes"]')).getAttribute('href')
+        ])
+            .then(function (arrayLinks) {
+                for (let i = 0; i < arrayLinks.length; i++) {
+                    element(by.css('[href*="' + arrayLinks[i] + '"]')).click();
+                    browser.getAllWindowHandles().then(function (handles) {
+                        browser.switchTo().window(handles[1]);
+                        browser.close();
+                        browser.switchTo().window(handles[0]);
+                    });
+                }
             });
-        }
     });
 
 });
