@@ -14,17 +14,35 @@ describe('Home task #10', function () {
     });
 
     it('User check product', function () {
+        // Main page
+
         // prepare
         var mainPageNameOfProduct = main_page.firstProductInCampaigns().$('.name').getText();
         var mainPageRegularPriceProduct = main_page.firstProductInCampaigns().$('.regular-price').getText();
         var mainPageCampaignPriceProduct = main_page.firstProductInCampaigns().$('.campaign-price').getText();
         var mainPageRegularPriceStyleProduct = main_page.firstProductInCampaigns().$('.regular-price').getCssValue('text-decoration');
-        var mainPageCampaignPriceStyleProduct = main_page.firstProductInCampaigns().$('.campaign-price').getCssValue('color');
         var mainPageCampaignPriceFontWeightProduct = main_page.firstProductInCampaigns().$('.campaign-price').getCssValue('font-weight');
         var mainPageRegularPriceSize = main_page.firstProductInCampaigns().$('.regular-price').getCssValue('font-size');
         var mainPageCampaignPriceSize = main_page.firstProductInCampaigns().$('.campaign-price').getCssValue('font-size');
 
-        // act
+        main_page.firstProductInCampaigns().$('.regular-price').getCssValue('text-decoration').then(function (styleStr) {
+            var rgbCodes = styleStr.match(/\d+/g);
+            var isEquals = rgbCodes.every(code => code === rgbCodes[0]);
+
+            // assert
+            expect(isEquals).toBe(true);
+        });
+
+        main_page.firstProductInCampaigns().$('.campaign-price').getCssValue('color').then(function (styleStr) {
+            var rgbCodes = styleStr.match(/\d+/g);
+
+            // assert
+            expect(rgbCodes[1]).toBe('0');
+            expect(rgbCodes[2]).toBe('0');
+        });
+
+        // Product
+
         main_page.firstProductInCampaigns().click();
 
         // prepare
@@ -32,21 +50,34 @@ describe('Home task #10', function () {
         var productPageRegularPriceProduct = $('.box .regular-price').getText();
         var productPageCampaignPriceProduct = $('.box .campaign-price').getText();
         var productPageRegularPriceStyleProduct = $('.box .regular-price').getCssValue('text-decoration');
-        var productPageCampaignPriceStyleProduct = $('.box .campaign-price').getCssValue('color');
         var productPageCampaignPriceFontWeightProduct = $('.box .campaign-price').getCssValue('font-weight');
         var productPageRegularPriceSize = $('.box .regular-price').getCssValue('font-size');
         var productPageCampaignPriceSize = $('.box .campaign-price').getCssValue('font-size');
+
+        $('.box .regular-price').getCssValue('text-decoration').then(function (styleStr) {
+            var rgbCodes = styleStr.match(/\d+/g);
+            var isEquals = rgbCodes.every(code => code === rgbCodes[0]);
+
+            // assert
+            expect(isEquals).toBe(true);
+        });
+
+        $('.box .campaign-price').getCssValue('color').then(function (styleStr) {
+            var rgbCodes = styleStr.match(/\d+/g);
+
+            // assert
+            expect(rgbCodes[1]).toBe('0');
+            expect(rgbCodes[2]).toBe('0');
+        });
 
         // assert
         expect(mainPageNameOfProduct).toBe(productPageNameOfProduct);
         expect(mainPageRegularPriceProduct).toBe(productPageRegularPriceProduct);
         expect(mainPageCampaignPriceProduct).toBe(productPageCampaignPriceProduct);
-        expect(mainPageRegularPriceStyleProduct).toBe('line-through solid rgb(119, 119, 119)');
-        expect(mainPageCampaignPriceStyleProduct).toBe('rgba(204, 0, 0, 1)');
+        expect(mainPageRegularPriceStyleProduct).toContain('line-through solid');
         expect(mainPageCampaignPriceFontWeightProduct).toBe('bold');
         expect(mainPageRegularPriceSize).toBeLessThan(mainPageCampaignPriceSize);
-        expect(productPageRegularPriceStyleProduct).toBe('line-through solid rgb(102, 102, 102)');
-        expect(productPageCampaignPriceStyleProduct).toBe('rgba(204, 0, 0, 1)');
+        expect(productPageRegularPriceStyleProduct).toContain('line-through solid');
         expect(productPageCampaignPriceFontWeightProduct).toBe('bold');
         expect(productPageRegularPriceSize).toBeLessThan(productPageCampaignPriceSize);
 
