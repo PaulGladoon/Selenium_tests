@@ -1,5 +1,5 @@
 var properties = require('../resoursces/properties.js');
-var authorization = require('../app-manager/authorization-helper.js');
+var authorization = require('../app-manager/authorization_helper.js');
 
 require('events').EventEmitter.defaultMaxListeners = 0; // shutdown max listeners
 var EC = protractor.ExpectedConditions; // assert protractor expected conditions

@@ -1,5 +1,8 @@
 var properties = require('../resoursces/properties.js');
-var authorization = require('../app-manager/authorization-helper.js');
+var goTo = require('../app-manager/navigation_helper.js');
+var product_page = require('../page-objects/product_page.js');
+var checkout_page = require('../page-objects/checkout_page.js');
+var buyer_helper = require('../app-manager/buyer_helper.js');
 
 require('events').EventEmitter.defaultMaxListeners = 0; // shutdown max listeners
 var EC = protractor.ExpectedConditions; // assert protractor expected conditions
@@ -18,35 +21,11 @@ describe('Home task #13', function () {
         // prepare
 
         // act
+        buyer_helper.addFirstProductInPopularToBasket(3);
 
-        for (let i = 0; i < 3; i++) {
-            browser.get('http://litecart.stqa.ru/index.php/en/');
-            element(by.css('#box-most-popular .product')).click();
-            $$('[name="options[Size]"]').then(function (value) {
-                if (value.length > 0) {
-                    element(by.name("options[Size]")).click();
-                    element(by.css('[value="Small"]')).click()
-                }
-            });
-            element(by.name('add_cart_product')).click();
-            element(by.css('#cart .quantity')).getText().then(function (quantityValue) {
-                browser.wait(EC.visibilityOf(element(by.cssContainingText('#cart .quantity', +quantityValue + 1))), 2000)
-            });
-        }
+        goTo.checkoutPage();
 
-        element(by.css('#cart a.link')).click();
-
-        $$('.shortcut').then(function (productsArray) {
-            for (let i = 0; i < productsArray.length; i++) {
-                $$('#checkout-summary-wrapper tr').then(function (trArray) {
-                    if (trArray.length > 0) {
-                        element(by.name('remove_cart_item')).click();
-                    } else {
-                        browser.wait(EC.invisibilityOf(element(by.css('tr.header'))), 2000);
-                    }
-                })
-            }
-        })
+        buyer_helper.removeProductsFromBasket();
     });
 
 });
